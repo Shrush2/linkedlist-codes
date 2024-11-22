@@ -1,0 +1,36 @@
+class Node{
+    int data;
+    Node next;
+    
+    public Node(int data1){
+        this.data=data1;
+        this.next = null;
+    }
+}
+class Main {
+    
+    
+    
+    
+    private static int SearchinLL(Node head,int val){
+        Node temp =head;
+        while(temp != null){
+            if(temp.data == val){
+                return 1;
+            }
+                temp = temp.next;
+            }
+                    return 0;
+
+        }
+    
+    public static void main(String[] args) {
+        int arr[] = {1,2,3,4,5,7};
+        Node head = ConvertArrtoLL(arr);
+        // System.out.println( LengthofLL(head));
+        System.out.println( SearchinLL(head,9));
+
+        
+        }
+    
+}
