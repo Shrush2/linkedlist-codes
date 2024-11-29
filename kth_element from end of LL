@@ -1,0 +1,25 @@
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+    public static Node findKthFromLast(Node head, int K) {
+
+        Node first = head;
+        Node second = head;
+
+     for(int i=0;i<K;i++){
+
+      if(first == null){
+            return null;
+        }
+        first = first.next;
+     }
+        
+        while(first != null){
+            first = first.next;
+            second = second.next;
+        }
+        return second;
+        
+        
+    }
+}
