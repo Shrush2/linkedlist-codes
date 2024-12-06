@@ -1,0 +1,56 @@
+
+ class Node {
+     public int data;
+     public Node next;
+
+     Node()
+     {
+         this.data = 0;
+         this.next = null;
+     }
+
+     Node(int data)
+     {
+         this.data = data;
+         this.next = null;
+     }
+
+     Node(int data, Node next)
+     {
+         this.data = data;
+         this.next = next;
+     }
+ }
+
+public class Solution
+{
+    public static int lengthOfLoop(Node head) {
+         Node slow = head;
+        Node fast = head;
+
+        while(fast != null && fast.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+
+
+            if(slow == fast){
+            return findLength(slow,fast);
+        }
+        }
+        
+        return 0;
+
+    }
+    public static int findLength(Node slow,Node fast){
+     int cnt=1;
+     fast = fast.next;
+     while(slow != fast){
+         cnt++;
+
+         fast = fast.next;
+
+     }
+     return cnt;
+        
+    }
+}
