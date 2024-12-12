@@ -1,0 +1,44 @@
+
+
+
+
+ class Node {
+     public int data;
+     public Node next;
+    
+     Node()
+     {
+         this.data = 0;
+         this.next = null;
+     }
+    
+     Node(int data)
+     {
+         this.data = data;
+         this.next = null;
+     }
+    
+     Node(int data, Node next)
+     {
+         this.data = data;
+         this.next = next;
+     }
+ }
+
+
+public class Solution {
+    public Node getIntersectionNode(Node headA, Node headB) {
+        Node a = headA;
+        Node b = headB;
+
+        if(headA == null || headB == null){
+            return null;
+        }
+
+        while(a != b){
+            a = (a == null) ? headB : a.next;
+            b = (b == null) ? headA : b.next;
+        }
+        return a;
+    }
+}
