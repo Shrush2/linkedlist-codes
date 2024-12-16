@@ -1,0 +1,34 @@
+
+    class Node
+    {
+        public:
+            int data;
+            Node next;
+            Node prev;
+            Node(int data)
+            {
+                this.data = data;
+                this.next = null;
+                this.prev = null;
+            }
+    };
+
+
+public class Solution {
+    public static Node uniqueSortedList(Node head) {
+        Node temp = head;
+        while(temp != null){
+            Node nextNode = temp.next;
+            while(nextNode != null && nextNode.data == temp.data){
+                nextNode = nextNode.next;
+            }
+            temp.next = nextNode;
+            // if(nextNode != null ){
+            //     nextNode.prev = temp;
+            // }
+        temp = temp.next;
+
+        }
+        return head;
+    }
+}
