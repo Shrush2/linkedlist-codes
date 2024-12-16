@@ -1,0 +1,20 @@
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+    public static int minimumSum(int[] arr1, int[] arr2, int n) {
+        // Write your code here.
+        Arrays.sort(arr1);
+        Arrays.sort(arr2);
+        int sum=0;
+        for(int i=0;i<n;i++){
+        sum+= Math.abs(arr1[i] - arr2[i]);
+        }
+        return sum;
+    }
+}
+
+Problem statement
+You have been given two arrays/lists 'ARR1' and 'ARR2' of length 'N'. Your task is to pair each element of 'ARR1' to an element of 'ARR2' such that the sum of the absolute difference of all pairs is minimum.
+
+Example:
+If 'ARR1' = [0, 2, 1], and 'ARR2' = [8, 10, 4] then the most optimal pairing will be (0, 4) , (1, 8) and (2, 10). The sum of absolute difference will be 4 + 7 + 8 = 19.
