@@ -1,0 +1,58 @@
+class Node
+{
+    int data;
+    Node next,prev;
+    
+    Node(int x){
+        data = x;
+        next = null;
+        prev = null;
+    }
+}
+
+You can also use the following for printing the link list.
+Node.printList(Node node);
+*/
+
+class Solution {
+    
+    public static Node findtail(Node head){
+        Node temp = head;
+        while(temp.next != null){
+            temp = temp.next;
+        }
+        return temp;
+    }
+    public static ArrayList<ArrayList<Integer>> findPairsWithGivenSum(int target, Node head) {
+        // code here
+    ArrayList<ArrayList<Integer>> result = new ArrayList<>();  // List to store pairs
+
+        Node start = head;
+        Node end = findtail(head);
+       
+
+        while(start.data < end.data && start != end){
+     int val = start.data + end.data;
+
+            if(val == target){
+                ArrayList<Integer> pair = new ArrayList<>();
+                pair.add(start.data);
+                pair.add(end.data);
+                result.add(pair); 
+                
+                start = start.next;
+                end = end.prev;
+                
+            }
+            else if(val < target ){
+                start = start.next;
+            }
+            else{
+                end = end.prev;
+            }
+            
+        }
+        return result;
+    }
+}
+        
