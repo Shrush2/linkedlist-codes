@@ -42,3 +42,25 @@ public class Solution
 
     }
 }
+
+
+---------another iterative method----------
+ public static Node reverseLinkedList(Node head)
+    {
+        if (head == null || head.next == null) {
+            return head;
+        }
+
+        Node curr = head;
+         Node prev = null;
+
+     while(curr != null){
+     Node temp = curr.next;
+    curr.next = prev;
+      prev = curr;
+       curr = temp;
+       }
+       head = prev;
+        
+        return head;
+    }
