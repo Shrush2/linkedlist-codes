@@ -1,69 +1,62 @@
-import java.util.* ;
-import java.io.*; 
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ * int val;
+ * ListNode next;
+ * ListNode() {}
+ * ListNode(int val) { this.val = val; }
+ * ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode sortList(ListNode head) {
+        if (head == null || head.next == null)
+            return head;
 
-    class Node {
-		public int data;
-		public Node next;
+        ListNode mid = getMiddle(head);
+        ListNode left = head;
+        ListNode right = mid.next;
+        mid.next = null;
 
-		public Node(int data) {
-			this.data = data;
-			this.next = null;
-	  	}
+        left = sortList(left);
+        right = sortList(right);
+
+        return merge(left, right);
     }
 
+    public static ListNode getMiddle(ListNode head) {
+        if (head == null)
+            return head;
+            
+        ListNode slow = head;
+        ListNode fast = head;
 
+        while (fast != null && fast.next != null && fast.next.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow;
+    }
 
-public class Solution {
-	public static Node sortLL(Node head) {
-		if(head == null || head.next == null){
-			return head;
-		}
-		Node middle = findMiddle(head);
-		
-		Node right = middle.next;
-		middle.next = null;
-		Node left = head;
+    public static ListNode merge(ListNode left, ListNode right) {
+        ListNode dummy = new ListNode(0);
+        ListNode curr = dummy;
 
-		left = sortLL(left);
-		right = sortLL(right);
-
-		return mergeLL(left, right);
-	}
-	public static Node mergeLL(Node list1,Node list2){
-		Node dummy = new Node(-1);
-		Node temp = dummy;
-
-		while(list1 != null && list2 != null){
-			if(list1.data <= list2.data){
-				temp.next = list1;
-				list1 = list1.next;
-			}else{
-				temp.next = list2;
-				list2 = list2.next;
-			}
-			temp = temp.next;
-		}
-
-			if(list1 != null){
-				temp.next = list1;
-			}else{
-				temp.next = list2;
-			}
-		
-		return dummy.next;
-	}
-
-	public static Node findMiddle(Node head){
-		if(head == null || head.next == null){
-			return head;
-		}
-		Node slow = head;
-		Node fast = head.next;
-
-		while(fast != null && fast.next != null){
-			slow = slow.next;
-			fast = fast.next.next;
-		}
-             return slow;
-	}
+        while (left != null && right != null) {
+            if (left.val <= right.val) {
+                curr.next = left;
+                left = left.next;
+            } else {
+                curr.next = right;
+                right = right.next;
+            }
+            curr = curr.next;
+        }
+        if (left != null) {
+            curr.next = left;
+        } else {
+            curr.next = right;
+        }
+        return dummy.next;
+    }
 }
