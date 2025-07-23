@@ -1,0 +1,58 @@
+/****************************************************************
+
+Following is the class structure of the Node class:
+
+class LinkedListNode {
+    public int data;
+    public LinkedListNode next;
+
+    LinkedListNode(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+*****************************************************************/
+
+public class Solution {
+
+    public static LinkedListNode mergeInBetween(int x, int y, LinkedListNode head1, LinkedListNode head2) {
+
+    LinkedListNode prevX = head1;
+    for(int i = 0; i < x-1;i++){
+        prevX = prevX.next;
+    }
+
+    LinkedListNode curr = prevX.next;
+    for(int i = x;i <= y;i++){
+        curr = curr.next;
+    }
+
+    LinkedListNode afterY = curr;
+
+    prevX.next = head2;
+
+    LinkedListNode tail = head2;
+    while(tail.next != null){
+        tail = tail.next;
+    }
+
+    tail.next = afterY;
+    return head1;
+
+	}
+
+}
+
+
+You are given two linked lists, ’head1’ and ‘head2’ of size ‘N’ and ‘M’. You are also provided with two integers, ‘X’ and ‘Y’, and your task is to remove the first Linked List’s nodes from index ‘X’ to 
+‘Y’ and insert all the nodes of the second Linked List in their place.
+
+You need to return the head of the merged Linked List.
+
+For example:
+If the first list is: [0 -> 1 -> 2 -> 3 -> 4 -> 5 -> NULL], the second list is: [10 -> 20 -> 30 -> NULL], ‘X’ = 2 and ‘Y’ = 4 then if we remove nodes from index 2 to 4, and after inserting the second list at
+index 2 then the final list will be: [0 -> 1 -> 10 -> 20 -> 30 -> 5 -> NULL].
+
+T.C => O(n + M)
+S.C => O(1)
