@@ -1,0 +1,62 @@
+import java.io.*;
+import java.util.* ;
+
+/************************************************************
+
+    Following is the linked list node structure:
+    
+    class LinkedListNode<T> {
+        T data;
+        LinkedListNode<T> next;
+
+        public LinkedListNode(T data) {
+            this.data = data;
+        }
+    }
+
+************************************************************/
+
+public class Solution {
+	public static LinkedListNode<Integer> sortTwoLists(LinkedListNode<Integer> first, LinkedListNode<Integer> second) {
+		// Write your code here.
+
+        LinkedListNode<Integer> pt1 = first;
+        LinkedListNode<Integer> pt2 = second;
+        LinkedListNode<Integer> dummy = new LinkedListNode(-1);
+        LinkedListNode<Integer> tail = dummy;
+        while(pt1 != null && pt2 != null){
+            if(pt1.data < pt2.data){
+                tail.next = pt1;
+                pt1 = pt1.next;
+            }else{
+                tail.next = pt2;
+                pt2 = pt2.next;
+            }
+            tail = tail.next;
+        }
+
+        while(pt1 != null){
+            tail.next = pt1;
+            pt1 = pt1.next;
+            tail = tail.next;
+        }
+
+        while(pt2 != null){
+            tail.next = pt2;
+            pt2 = pt2.next;
+            tail = tail.next;
+        }
+        return dummy.next;
+	}
+}
+
+You are given two sorted linked lists. You have to merge them to produce a combined sorted linked list. You need to return the head of the final linked list.
+Note:
+The given linked lists may or may not be null.
+For example:
+If the first list is: 1 -> 4 -> 5 -> NULL and the second list is: 2 -> 3 -> 5 -> NULL
+The final list would be: 1 -> 2 -> 3 -> 4 -> 5 -> 5 -> NULL
+
+
+T.C => O(N + M)
+S.C => O(1)
