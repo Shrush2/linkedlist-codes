@@ -1,0 +1,72 @@
+import java.util.* ;
+import java.io.*; 
+/************************************************************
+
+    Following is the linked list node structure
+    
+    class Node {
+	int data;
+	Node next;
+
+	Node(int data) {
+		this.data = data;
+		this.next = null;
+	    }
+   }
+
+************************************************************/
+
+public class Solution {
+	public static Node rearrangeList(Node head)
+	{
+		if(head == null || head.next == null){
+			return head;
+		}
+		// Write your code here.
+		Node slow = head;
+		Node fast = head;
+		while(fast != null && fast.next != null && fast.next.next != null){
+			slow = slow.next;
+			fast = fast.next.next;
+		}
+
+		Node second = reverseLinkedList(slow.next);
+		slow.next = null;
+		Node first = head;
+		while(first != null && second != null){
+			Node temp1 = first.next;
+			Node temp2 = second.next;
+
+			first.next = second;
+			second.next = temp1;
+
+			first = temp1;
+			second = temp2;
+		}
+		return head;
+	}
+
+	public static Node reverseLinkedList(Node head){
+		Node prev = null;
+		Node curr = head;
+
+		while(curr != null){
+			Node nextNode = curr.next;
+			curr.next = prev;
+			prev = curr;
+			curr = nextNode;
+		}
+		return prev;
+	}
+}
+
+
+You have been given a singly Linked List in the form of 'L1' -> 'L2' -> 'L3' -> ... 'Ln'. Your task is to rearrange the nodes of this list to make it in the form of 'L1' -> 'Ln' -> 'L2' -> 'Ln-1' and so on. 
+You are not allowed to alter the data of the nodes of the given linked list.
+For example:
+If the given linked list is 1 -> 2 -> 3 -> 4 -> 5 -> NULL.
+Then rearrange it into 1 -> 5 -> 2 -> 4 -> 3 -> NULL. 
+
+
+T.C => O(N)
+S.C => O(1)
