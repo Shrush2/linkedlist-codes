@@ -1,0 +1,73 @@
+import java.util.* ;
+import java.io.*; 
+/*
+    Time Complexity : O(K)
+    Space Complexity : O(1)
+
+    Where, K is the position of the node to be inserted in the list.
+*/
+
+/************************************************************
+
+ Following is the linkedList class structure:
+
+ class Node<T> {
+ T data;
+ Node<T> next;
+
+ public Node(T data) {
+ this.data = data;
+ }
+ }
+
+ ************************************************************/
+
+public class Solution {
+
+    static Node insert(int k, int val, Node head) {
+        // Write your code here.
+        Node newNode = new Node(val);
+
+        if(k == 0){
+
+            if(head == null){
+                newNode.next = newNode;
+                return newNode;
+            }
+
+            Node tail = head;
+            while(tail.next != head){
+                tail = tail.next;
+            }
+            newNode.next = head;
+            tail.next = newNode;
+            return newNode;
+           
+        }
+        Node curr = head;
+
+        for(int i = 0; i < k-1; i++){
+            curr = curr.next;
+        }
+
+        newNode.next = curr.next;
+        curr.next = newNode;
+
+
+        return head;
+    }
+}
+
+
+You are given a circular singly linked list, where every node in the linked list contains a pointer 'next' which points to the next node in the list, and the last node points to the head of the list.
+All nodes have some positive integer value 'data' associated with them.
+Your task is to insert a new node with 'data' equal to 'val' in the linked list at a given position 'k'.
+The position given will always be less than or equal to the length of the linked list. Assume all the indexing starts from '0'.
+
+
+
+Input : 'k' = 1, 'val' = 5, 'list' = [1, 2, 3, 4]
+Output: 1 5 2 3 4
+
+Explanation:
+The node with 'data' = 5, is inserted at position 1(0 indexed) in the circular linked list as follows:
