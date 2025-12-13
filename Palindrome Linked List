@@ -1,0 +1,71 @@
+import java.util.* ;
+import java.io.*; 
+/****************************************************************
+
+    Following is the class structure of the LinkedListNode class:
+	
+	class LinkedListNode<T> {
+    	T data;
+    	LinkedListNode<T> next;
+
+    	public LinkedListNode(T data) {
+        	this.data = data;
+    	}
+	}
+
+*****************************************************************/
+
+public class Solution {
+
+	public static boolean isPalindrome(LinkedListNode<Integer> head) {
+		// Write your code here!
+		if(head == null || head.next == null){
+			return true;
+		}
+
+		LinkedListNode<Integer> slow = head;
+		LinkedListNode<Integer> fast = head;
+
+		while(fast != null && fast.next != null){
+			fast = fast.next.next;
+			slow = slow.next;
+		}
+
+		LinkedListNode<Integer> secondHalf = reverse(slow);
+
+		LinkedListNode<Integer> first = head;
+		LinkedListNode<Integer> second = secondHalf;
+
+		while(second != null){
+			if(!(first.data.equals(second.data))) return false;
+				first = first.next;
+				second = second.next;
+			
+		} 
+		return true;
+	}
+
+	public static LinkedListNode<Integer> reverse(LinkedListNode<Integer> head){
+
+		LinkedListNode<Integer> prev = null;
+
+		while(head != null){
+			LinkedListNode<Integer> nextNode = head.next;
+			head.next = prev;
+			prev = head;
+			head = nextNode;
+		}
+		return prev;
+	}
+}
+
+
+
+ou are given a singly Linked List of integers. Your task is to return true if the given singly linked list is a palindrome otherwise returns false.
+For example:
+The given linked list is 1 -> 2 -> 3 -> 2-> 1-> NULL. 
+output := yes its paalindrome
+
+
+T.C => O(N)
+S.C => O(1)
