@@ -1,0 +1,54 @@
+import java.util.* ;
+import java.io.*; 
+/****************************************************************
+
+    Following is the class structure of the Node class:
+
+    class Node
+    {
+    	public int data;
+        public Node next;
+        Node(int data)
+        {
+	        this.data = data;
+	        this.next = null;
+        }
+    };
+
+*****************************************************************/
+
+public class Solution {
+	public static  Node delAddLastNode(Node head) {
+		// Write your code here.
+    if(head == null || head.next == null){
+        return head;
+    }
+    
+    Node tail = head;
+    while(tail.next.next != null){
+        tail = tail.next;
+    }
+	
+    Node newHead = tail.next;
+    tail.next = null;
+
+    newHead.next = head;
+    return newHead;
+    }
+}
+
+You are provided with a singly linked list, all you have to do is to delete the last node of the linked list and add it to the front of the linked list.
+
+
+2 5 3 11 1 -1
+2 -1
+Sample Output 1:
+1 2 5 3 11 -1
+2 -1
+Explanation of Sample Output 1:
+In test case 1, the new linked list after doing delete and add operations to the last node: 1 2 5 3 11 -1.
+
+
+
+T.C => O(N)
+S.C => O(1)
