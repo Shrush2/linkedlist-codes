@@ -1,0 +1,59 @@
+import java.util.* ;
+import java.io.*; 
+/*************************
+ * Following is the linked list node class
+    class Node {
+        
+        int data;
+        Node next;
+
+        Node(int val) {
+            this.data = val;
+            next = null;
+        }
+    }
+
+ ***************/
+
+public class Solution {
+
+    public static Node intersect_ll(Node L1, Node L2) {
+        
+        // Write your Code here
+        Node dummy = new Node(-1);
+        Node tail = dummy;
+
+        Node p1 = L1;
+        Node p2 = L2;
+
+        while(p1 != null && p2 != null){
+            if(p1.data == p2.data){
+                tail.next = new Node(p1.data);
+                tail = tail.next;
+                p1 = p1.next;
+                p2 = p2.next;
+            }else if(p1.data < p2.data){
+                p1 = p1.next;
+            }else{
+                p2 = p2.next;
+            }
+        }
+
+    return dummy.next;
+
+    }   
+}
+
+
+You are given two linked lists L1 and L2 which are sorted in ascending order. You have to make a linked list with the elements which are present in both the
+linked lists and are present in ascending order.
+
+Example:-
+L1 = 1->2->3->4->7
+L2 = 2->4->6->7
+
+ANSWER:- The answer should be 2->4->7 because 2,4, and 7 are present in both the linked lists.
+
+
+T.C => O(N)
+S.C => O(N)
