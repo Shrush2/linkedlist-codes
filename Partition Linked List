@@ -1,0 +1,73 @@
+
+import java.util.* ;
+import java.io.*; 
+
+/****************************************************************
+
+    Following is the class structure of the Node class:
+
+       	class Node {
+    	int data;
+    	Node next;
+
+    	Node(int x) {
+        	this.data = x;
+        	this.next = null;
+    	}
+};
+
+*****************************************************************/
+
+public class Solution {
+    public static Node partition(Node head, int x) {
+
+    if(head == null) return head;
+
+    Node Sdummy = new Node(0);
+    Node Edummy = new Node(0);
+    Node Ldummy = new Node(0);
+
+    Node smallList = Sdummy;
+    Node equalLists = Edummy;
+    Node LargeLists = Ldummy;
+
+    Node temp = head;
+
+    while(temp != null){
+        if(temp.data < x){
+          smallList.next = temp;
+          smallList = smallList.next;
+        }else if(temp.data == x){
+            equalLists.next = temp;
+            equalLists = equalLists.next;
+        }else{
+            LargeLists.next = temp;
+            LargeLists = LargeLists.next;
+        }
+        temp = temp.next;
+    }
+
+    LargeLists.next = null;
+    equalLists.next = Ldummy.next;
+    smallList.next = Edummy.next;
+    
+    if(Sdummy.next != null){
+        return Sdummy.next;
+    }else if(Edummy.next != null){
+        return Edummy.next;
+    }else{
+        return Ldummy.next;
+    }
+         
+    }
+}
+
+
+Problem statement
+You are given the head of a singly linked list and an integer X. Your task is to partition the linked list around the value X such that:
+All nodes with values less than X come first.
+All nodes with values equal to X come next.
+All nodes with values greater than X come at the end.
+Crucially, the original relative order of the nodes within each of these three partitions must be preserved.
+Your function should rearrange the nodes in-place (or by creating new lists and linking them) and return the head of the newly formed partitioned list.
+
