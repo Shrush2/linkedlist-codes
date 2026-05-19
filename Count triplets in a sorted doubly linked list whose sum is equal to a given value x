@@ -1,0 +1,73 @@
+import java.util.* ;
+import java.io.*; 
+/****************************************************************
+
+        Following is the class structure of the Node class:
+
+        class DLLNode
+        {
+         	int data;
+        	DLLNode next;
+       		DLLNode prev;
+        }
+
+*****************************************************************/
+
+
+
+public class Solution {
+    public static int countTriplets(DLLNode head,int x){
+        // Write your code here
+
+        if(head == null || head.next == null || head.next.next == null){
+            return 0;
+        }
+
+        int cnt = 0;
+        DLLNode last = head;
+
+        while(last.next != null){
+            last = last.next;
+        }
+
+        DLLNode curr = head;
+
+        while(curr != null){
+        int target = x - curr.data;
+        DLLNode left = curr.next;
+        DLLNode right = last;
+
+        while(left != null && right != null && left != right && right.next != left){
+            int sum = left.data + right.data;
+            if(sum == target){
+                cnt++;
+                left = left.next;
+                right = right.prev;
+            }else if(sum < target){
+                left = left.next;
+            }else{
+                right = right.prev;
+            }
+        }
+        curr = curr.next;
+
+        }
+        
+        return cnt;
+    }
+}
+
+
+You are given a sorted doubly linked list of distinct nodes that means no two nodes present in the list have the same data. You are also given an integer 'X'.
+Your task is to count the number of triplets in the list that sum up to a given value 'X'.
+A doubly linked List (DLL) contains an extra pointer, called the previous pointer, together with the next pointer and data, which are there in the singly linked list such that both forward and backward navigation is possible.
+
+For example, DLL is 1<->2<->3<->4 NULL and the given integer 'X' is 9, then the number of triplets having the sum 9 is only one, and that is (2,3,4).
+
+Note:
+1. If no such triplets exist, return zero.
+2. At least three elements will always be present in the linked list.
+
+
+T.C = O(N^2)
+S.c => O(N)
