@@ -1,0 +1,44 @@
+import java.util.* ;
+import java.io.*; 
+/****************************************************************
+
+    Following is the class structure of the linkedListNode class:
+
+    class linkedListNode {
+        public int data;
+        public LinkedListNode next;
+
+        linkedListNode(int data) {
+            this.data = data;
+            this.next = null;
+        }
+    }
+
+*****************************************************************/
+
+public class Solution {
+    public static linkedListNode zeroConsecutiveNodes(linkedListNode head) {
+        // Write your code here.
+        Map<Integer, linkedListNode> map = new HashMap<>();
+
+        linkedListNode dummy = new linkedListNode(0);
+        linkedListNode curr = dummy;
+        dummy.next = head;
+        int prefixSum = 0;
+
+        while(curr != null){
+        prefixSum += curr.data;
+        map.put(prefixSum,curr);
+        curr = curr.next;
+        }
+
+        prefixSum = 0;
+        curr = dummy;
+        while(curr != null){
+            prefixSum += curr.data;
+            curr.next = map.get(prefixSum).next;
+            curr = curr.next;
+        }
+        return dummy.next;
+    }
+}
